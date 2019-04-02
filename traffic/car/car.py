@@ -1,6 +1,8 @@
+import random
+
 class car:
     'Defines a single car with its queue status and wait time'
-    def __init__(self, latency:int = random.randrange(1,6), queue_id:str):
+    def __init__(self, queue_id:str, latency:int = random.randrange(1,6)):
         self.queue_id = queue_id
         self.latency = latency
         self.time_waiting = 0
