@@ -10,3 +10,7 @@ class car:
 
     def change_queues(self, queue_id:str):
         self.queue_id = queue_id
+
+    def printInfo(self):
+        print('Queue ID: {0}; Latency: {1}'.format(self.queue_id, self.latency))
+
