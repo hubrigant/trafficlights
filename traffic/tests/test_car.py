@@ -1,7 +1,8 @@
 import pytest
-from cars import Car
+from cars.car import Car
 
 class TestClass(object):
     def test_constructor(self):
-        my_car = Car()
-        assert my_car
+        with pytest.raises(TypeError):
+            my_car = Car()
+        assert Car(queue_id = 'test queue')
