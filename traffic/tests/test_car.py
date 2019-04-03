@@ -1,7 +1,7 @@
 import pytest
-from car import Car
+from car import car
 
 class TestClass(object):
     def test_constructor(self):
-        my_car = Car()
+        my_car = car()
         assert my_car
