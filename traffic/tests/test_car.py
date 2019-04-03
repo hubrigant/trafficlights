@@ -1,5 +1,5 @@
 import pytest
-from car import Car
+from cars import Car
 
 class TestClass(object):
     def test_constructor(self):
