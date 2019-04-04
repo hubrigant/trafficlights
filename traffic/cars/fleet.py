@@ -12,3 +12,28 @@ class Fleet:
 
     def get_list(self):
         return self.cars
+
+
+    def __iter__(self):
+       return self
+
+
+    def __next__(self):
+        try:
+            result = self.cars[self.index]
+        except IndexError:
+            raise StopIteration
+        self.index += 1
+        return result
+
+
+    def __getitem__(self, key:int):
+        return self.cars[key]
+
+
+    def __len__(self):
+        return len(self.cars)
+
+
+    def __contains__(self, item):
+        return item in self.cars
