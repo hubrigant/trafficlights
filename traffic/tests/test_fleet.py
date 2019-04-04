@@ -24,3 +24,9 @@ class TestClass(object):
         my_list_of_cars = my_fleet.get_list()
         assert type(my_list_of_cars) == list
 
+
+    def test_contains(self):
+        my_fleet = Fleet(queue_id='test')
+        my_list_of_cars = my_fleet.get_list()
+        assert my_list_of_cars[0] in my_fleet
+
