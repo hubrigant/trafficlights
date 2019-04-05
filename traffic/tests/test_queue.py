@@ -2,6 +2,7 @@ import pytest
 import collections
 from cars.car import Car
 from intersections.queue import Queue, QueueFullError
+from cars.fleet import Fleet
 
 class TestClass(object):
     def test_constructor(self):
@@ -21,6 +22,9 @@ class TestClass(object):
         assert my_queue.remove_car() == 1
         assert my_queue.pop() == my_car
         assert len(my_queue) == 0
+        my_fleet = Fleet(my_queue.name, quantity=my_queue.max_queue_depth)
+        my_queue.add_cars(my_fleet.get_list())
+        assert len(my_queue) == my_queue.max_queue_depth
 
 
     def test_iterator(self, build_queue):
@@ -36,6 +40,8 @@ class TestClass(object):
 
 
     def test_contains(self, fill_queue):
-        my_queue = fill_queue
+        my_queue = Queue(queue_id = "test3", max_queue_depth = 7)
+        for _ in range(my_queue.max_queue_depth):
+            my_queue.add_car(Car(queue_id = my_queue.name))
         my_car = my_queue[0]
         assert my_car in my_queue

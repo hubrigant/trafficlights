@@ -26,6 +26,11 @@ class Queue:
             # raise QueueFullError("Queue already full")
 
 
+    def add_cars(self, cars:List[Car]):
+        for i in range(len(cars)):
+            self.add_car(cars[i])
+        return len(self.cars)
+
     def remove_car(self):
         self.pop()
         return len(self.cars)
