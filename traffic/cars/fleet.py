@@ -6,6 +6,7 @@ class Fleet:
     def __init__(self, queue_id:str, quantity:int = 10):
         self.quantity = quantity
         self.queue_id = queue_id
+        self.index = 0
         self.cars = []
         for _ in range(self.quantity):
             self.cars.append(Car(queue_id = self.queue_id))

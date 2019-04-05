@@ -13,14 +13,16 @@ class TestClass(object):
 
 
     def test_add_remove(self):
-        my_queue = Queue(queue_id = "test2", max_queue_depth = 2)
+        my_queue = Queue(queue_id = "test2", max_queue_depth = 3)
         my_car = Car(queue_id = "test2")
         assert my_queue.add_car(my_car) == 1
         assert my_queue.add_car(my_car) == 2
+        assert my_queue.add_car(my_car) == 3
         with pytest.raises(QueueFullError):
             my_queue.add_car(my_car)
-        assert my_queue.remove_car() == 1
+        assert my_queue.remove_car() == 2
         assert my_queue.pop() == my_car
+        assert my_queue.pop(0) == my_car
         assert len(my_queue) == 0
 
 
@@ -50,7 +52,10 @@ class TestClass(object):
         assert len(my_queue_list) == 10
         assert my_queue[1] == my_car
         assert isinstance(my_queue, collections.Iterable)
-        assert my_car in my_queue
+        car_counter = 0
+        for _ in my_queue:
+            car_counter += 1
+        assert car_counter == len(my_queue)
 
 
     def test_contains(self, fill_queue):

@@ -9,7 +9,7 @@ class TestClass(object):
         my_fleet = Fleet(queue_id='test')
         assert my_fleet
         assert my_fleet.quantity == 10
-    
+
 
     def test_iterator(self):
         my_fleet = Fleet(queue_id='test')
@@ -17,6 +17,10 @@ class TestClass(object):
         assert isinstance(my_fleet, collections.Iterable)
         assert my_list_of_cars[0] == my_fleet[0]
         assert my_list_of_cars[0] in my_fleet
+        car_counter = 0
+        for _ in my_fleet:
+            car_counter += 1
+        assert car_counter == len(my_fleet)
 
 
     def test_get_methods(self):
@@ -29,4 +33,3 @@ class TestClass(object):
         my_fleet = Fleet(queue_id='test')
         my_list_of_cars = my_fleet.get_list()
         assert my_list_of_cars[0] in my_fleet
-
