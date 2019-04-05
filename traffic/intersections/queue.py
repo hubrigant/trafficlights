@@ -23,13 +23,13 @@ class Queue:
         else:
             # raise error because queue is full
             raise QueueFullError("Queue '{0}' already full with {1} cars".format(self.name, len(self.cars)))
-            # raise QueueFullError("Queue already full")
 
 
     def add_cars(self, cars:List[Car]):
         for i in range(len(cars)):
             self.add_car(cars[i])
         return len(self.cars)
+
 
     def remove_car(self):
         self.pop()
