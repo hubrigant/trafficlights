@@ -11,7 +11,7 @@ class Queue:
     'Defines a queue of cars'
     def __init__(self, queue_id:str, max_queue_depth:int = 10):
         self.max_queue_depth = max_queue_depth
-        self.name = queue_id
+        self.queue_id = queue_id
         self.cars = []
         self.index = 0
 
@@ -22,7 +22,13 @@ class Queue:
             return len(self.cars)
         else:
             # raise error because queue is full
-            raise QueueFullError("Queue '{0}' already full with {1} cars".format(self.name, len(self.cars)))
+            raise QueueFullError("Queue '{0}' already full with {1} cars".format(self.queue_id, len(self.cars)))
+
+
+    def fill(self):
+        for _ in range(self.max_queue_depth):
+            self.add_car(Car(queue_id = self.queue_id))
+        return len(self)
 
 
     def add_cars(self, cars:List[Car]):

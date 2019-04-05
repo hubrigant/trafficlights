@@ -17,5 +17,5 @@ def build_queue():
 def fill_queue():
     my_queue = Queue(queue_id = 'fixture full queue', max_queue_depth = 10)
     for _ in range(my_queue.max_queue_depth):
-        my_queue.add_car(Car(queue_id = my_queue.name))
+        my_queue.add_car(Car(queue_id = my_queue.queue_id))
     return my_queue
