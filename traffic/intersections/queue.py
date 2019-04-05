@@ -36,6 +36,10 @@ class Queue:
         return len(self.cars)
 
 
+    def empty(self):
+        self.cars = []
+
+
     def pop(self, index:int = -1):
         if index == -1:
             return self.cars.pop()

@@ -22,9 +22,18 @@ class TestClass(object):
         assert my_queue.remove_car() == 1
         assert my_queue.pop() == my_car
         assert len(my_queue) == 0
+
+
+    def test_add_remove_multiple(self):
+        my_queue = Queue(queue_id = "test3", max_queue_depth = 5)
         my_fleet = Fleet(my_queue.name, quantity=my_queue.max_queue_depth)
         my_queue.add_cars(my_fleet.get_list())
         assert len(my_queue) == my_queue.max_queue_depth
+        my_queue.empty()
+        assert len(my_queue) == 0
+        my_fleet = Fleet(my_queue.name, quantity=5)
+        my_queue.add_cars(my_fleet.get_list())
+        assert len(my_queue) == 5
 
 
     def test_iterator(self, build_queue):
