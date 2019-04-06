@@ -8,6 +8,8 @@ class TestClass(object):
         my_car = Car(queue_id = 'test queue')
         assert my_car.queue_id == 'test queue'
         assert my_car.latency > 0
+        assert my_car.state == 0
+        assert my_car.distance_remaining == 0
         my_car2 = Car(queue_id = 'test queue', latency = 1)
         assert my_car2.latency == 1
 

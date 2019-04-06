@@ -6,6 +6,8 @@ class Car:
         self.queue_id = queue_id
         self.latency = latency
         self.time_waiting = 0
+        self.state = 0
+        self.distance_remaining = 0
 
 
     def __str__(self):

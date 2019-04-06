@@ -23,4 +23,4 @@ c) The intersection buffer is not full
 
 The four input roads and the exit are considered to have infinite capacity. Funnel road L can hold five cars. Funnel road R can hold 10.
 
-Cars have four possible states: waiting, reacting, moving, and exited. When moving, all cars move at the same speed, but each car has its own latency delay between when it's first possible to move and when it actually moves. The latency is randomly assigned in the range of 1-5. It takes a car 5 ticks to travel 3 car lengths (i.e. the distance across an intersection), although this is likely only relevant at the beginning of the simulation before the funnel roads have filled.
+Cars have four possible states: waiting, reacting, moving, and exited (0-4 respectively). When moving, all cars move at the same speed, but each car has its own latency delay between when it's first possible to move and when it actually moves. The latency is randomly assigned in the range of 1-5. Once moving, it takes a car 2 ticks to travel 1 car length. A car cannot start moving until the car in front of it has moved.
