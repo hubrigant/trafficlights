@@ -4,65 +4,70 @@ from typing import List
 
 class QueueFullError(TypeError):
     def __init__(self, error_text:str):
-        self.error_text = error_text
+        self.__error_text = error_text
 
 
 class Queue:
     'Defines a queue of cars'
     def __init__(self, queue_id:str, max_queue_depth:int = 10):
-        self.max_queue_depth = max_queue_depth
-        self.queue_id = queue_id
-        self.cars = []
-        self.index = 0
+        self.__max_queue_depth = max_queue_depth
+        self.__queue_id = queue_id
+        self.__cars = []
+        self.__index = 0
 
 
     def add_car(self, car:Car):
-        if len(self.cars) < self.max_queue_depth:
-            self.cars.append(car)
-            return len(self.cars)
+        if len(self.__cars) < self.__max_queue_depth:
+            self.__cars.append(car)
+            return len(self.__cars)
         else:
             # raise error because queue is full
-            raise QueueFullError("Queue '{0}' already full with {1} cars".format(self.queue_id, len(self.cars)))
+            raise QueueFullError(("Queue '{0}' already full with {1} cars"
+                                 ).format(self.__queue_id, len(self.__cars)))
+
+
+    def get_variables(self):
+        return {'max_queue_depth': self.__max_queue_depth,'queue_id': self.__queue_id}
 
 
     def fill(self):
-        for _ in range(self.max_queue_depth):
-            self.add_car(Car(queue_id = self.queue_id))
+        for _ in range(self.__max_queue_depth):
+            self.add_car(Car(queue_id = self.__queue_id))
         return len(self)
 
 
     def add_cars(self, cars:List[Car]):
         for i in range(len(cars)):
             self.add_car(cars[i])
-        return len(self.cars)
+        return len(self.__cars)
 
 
     def remove_car(self):
         self.pop()
-        return len(self.cars)
+        return len(self.__cars)
 
 
     def empty(self):
-        self.cars = []
+        self.__cars = []
 
 
     def pop(self, index:int = -1):
         if index == -1:
-            return self.cars.pop()
+            return self.__cars.pop()
         else:
-            return self.cars.pop(index)
+            return self.__cars.pop(index)
 
 
     def get_list(self):
-        return self.cars
+        return self.__cars
 
 
     def __len__(self):
-        return len(self.cars)
+        return len(self.__cars)
 
 
     def __getitem__(self, key: int = 0):
-        return self.cars[key]
+        return self.__cars[key]
 
 
     def __iter__(self):
@@ -71,12 +76,12 @@ class Queue:
 
     def __next__(self):
         try:
-            result = self.cars[self.index]
+            result = self.__cars[self.__index]
         except IndexError:
             raise StopIteration
-        self.index += 1
+        self.__index += 1
         return result
 
 
     def __contains__(self, item):
-        return item in self.cars
+        return item in self.__cars
