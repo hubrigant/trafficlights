@@ -39,6 +39,9 @@ class TestClass(object):
         assert my_car.set_value(variable = 'distance_moved',
                                 value='99',
                                 type='int') == 99
+        assert my_car.set_value(variable = 'last_distance_moved',
+                                value = '66',
+                                type='int')
 
     def test_str_output(self):
         my_car = Car(queue_id = 'str test')
