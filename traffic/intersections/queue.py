@@ -27,7 +27,9 @@ class Queue:
 
 
     def get_variables(self):
-        return {'max_queue_depth': self.__max_queue_depth,'queue_id': self.__queue_id}
+        return {'max_queue_depth': self.__max_queue_depth,
+                'queue_id': self.__queue_id,
+                'cars': self.__cars}
 
 
     def fill(self):
@@ -42,24 +44,15 @@ class Queue:
         return len(self.__cars)
 
 
-    def remove_car(self):
-        self.pop()
-        return len(self.__cars)
-
-
     def empty(self):
         self.__cars = []
 
 
-    def pop(self, index:int = -1):
-        if index == -1:
-            return self.__cars.pop()
-        else:
+    def pop(self, index:int = None):
+        if index:
             return self.__cars.pop(index)
-
-
-    def get_list(self):
-        return self.__cars
+        else:
+            return self.__cars.pop()
 
 
     def __len__(self):
