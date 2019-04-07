@@ -22,11 +22,6 @@ class TestClass(object):
                 eval(variable)
 
 
-    # def test_get_variables(self):
-    #     my_car = Car(queue_id = 'get_variables test')
-    #     assert my_car.get_variables()['latency'] == 0
-
-
     def test_set_value(self):
         my_car = Car(queue_id = 'set_value test')
         assert my_car.set_value(variable = 'latency',
@@ -46,23 +41,21 @@ class TestClass(object):
                                 type='int') == 99
 
     def test_str_output(self):
-        my_car = Car(queue_id = 'str method test')
-        assert str(my_car) == 'Queue ID: str method test; Latency: 0, Moved: 0'
+        my_car = Car(queue_id = 'str test')
+        assert str(my_car) == 'Queue ID: str test; State: waiting, ' \
+                              'Latency: 0, Moved: 0, Waiting: 0'
 
 
     def test_notify(self):
         my_car = None
         my_car = Car(queue_id = 'notify method test')
         assert my_car.get_variables()['time_waiting'] == 0
-        print("Test> b4 first notify()")
         assert my_car.notify(can_move = True) == ('reacting', 0) # wait->react
         assert my_car.get_variables()['latency'] >= 1
         assert my_car.get_variables()['distance_moved'] == 0
         my_car.set_value(variable = 'latency', value = '1', type = 'int')
-        print("Test> b4 2nd notify()")
         assert my_car.notify(can_move = True) == ('reacting', 0) #
         assert my_car.get_variables()['time_waiting'] == 2
-        print("Test> b4 3rd notify()")
         assert my_car.notify(can_move = True) == ('moving', 1)
-        print("Test> b4 4th notify()")
         assert my_car.notify(can_move = True) == ('moving', 2)
+        assert my_car.notify(can_move = False) == ('waiting', 2)
