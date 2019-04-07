@@ -8,6 +8,7 @@ class Car:
         self.__time_waiting = 0
         self.__state = 'waiting'
         self.__distance_moved = 0
+        self.__last_distance_moved = 0
 
 
     def set_value(self, variable: str, value: str, type: str):
@@ -30,15 +31,20 @@ class Car:
         if variable == 'distance_moved':
             self.__distance_moved = my_value
             return self.__distance_moved
+        if variable == 'last_distance_moved':
+            self.__last_distance_moved = my_value
+            return self.__last_distance_moved
 
 
     def __str__(self):
-        return ('Queue ID: {0}; State: {1}, Latency: {2}, Moved: {3}, Waiting: {4}'
+        return ('Queue ID: {0}; State: {1}, Latency: {2}, Moved: {3}, ' \
+                'Waiting: {4}, Last Moved: {5}'
                ).format(self.__queue_id,
                         self.__state,
                         self.__latency,
                         self.__distance_moved,
-                        self.__time_waiting
+                        self.__time_waiting,
+                        self.__last_distance_moved
                         )
 
 
@@ -47,7 +53,8 @@ class Car:
                 'state': self.__state,
                 'queue_id': self.__queue_id,
                 'distance_moved': self.__distance_moved,
-                'time_waiting': self.__time_waiting
+                'time_waiting': self.__time_waiting,
+                'last_distance_moved': self.__last_distance_moved
                }
 
 
@@ -62,9 +69,11 @@ class Car:
                     self.__latency -= 1
                 else:
                     self.__state = 'moving'
+                    self.__last_distance_moved = self.__distance_moved
                     self.__distance_moved += 1
             elif self.__state == 'moving':
+                self.__last_distance_moved = self.__distance_moved
                 self.__distance_moved += 1
         else:
             self.__state = 'waiting'
-        return self.__state, self.__distance_moved
+        return self.__state, self.__last_distance_moved, self.__distance_moved

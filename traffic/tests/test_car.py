@@ -43,19 +43,20 @@ class TestClass(object):
     def test_str_output(self):
         my_car = Car(queue_id = 'str test')
         assert str(my_car) == 'Queue ID: str test; State: waiting, ' \
-                              'Latency: 0, Moved: 0, Waiting: 0'
+                              'Latency: 0, Moved: 0, Waiting: 0, Last Moved: 0'
 
 
     def test_notify(self):
         my_car = None
         my_car = Car(queue_id = 'notify method test')
         assert my_car.get_variables()['time_waiting'] == 0
-        assert my_car.notify(can_move = True) == ('reacting', 0) # wait->react
+        assert my_car.notify(can_move = True) == ('reacting', 0, 0)
         assert my_car.get_variables()['latency'] >= 1
         assert my_car.get_variables()['distance_moved'] == 0
         my_car.set_value(variable = 'latency', value = '1', type = 'int')
-        assert my_car.notify(can_move = True) == ('reacting', 0) #
+        assert my_car.notify(can_move = True) == ('reacting', 0, 0)
         assert my_car.get_variables()['time_waiting'] == 2
-        assert my_car.notify(can_move = True) == ('moving', 1)
-        assert my_car.notify(can_move = True) == ('moving', 2)
-        assert my_car.notify(can_move = False) == ('waiting', 2)
+        assert my_car.notify(can_move = True) == ('moving', 0, 1)
+        assert my_car.notify(can_move = True) == ('moving', 1, 2)
+        assert my_car.notify(can_move = False) == ('waiting', 1, 2)
+        assert my_car.get_variables()['last_distance_moved'] == 1
