@@ -12,11 +12,22 @@ class TestClass(object):
         assert my_queue.get_variables()['queue_id'] == "test1"
 
 
+    def test_set_value(self, build_queue):
+        my_queue = build_queue
+        my_queue.set_value(variable = 'max_queue_depth',
+                           value = '99',
+                           type = 'int'
+                          )
+        assert my_queue.get_variables()['max_queue_depth'] == 99
+
+
     def test_get_variables(self):
         my_queue = Queue(queue_id = "get variables", max_queue_depth = 2)
         assert my_queue.get_variables() == {'max_queue_depth': 2,
                                             'queue_id': 'get variables',
-                                            'cars': []
+                                            'cars': [],
+                                            'num_cars': 0,
+                                            'state': 'waiting'
                                            }
 
 
@@ -74,3 +85,30 @@ class TestClass(object):
             my_queue.add_car(Car(queue_id = my_queue.get_variables()['queue_id']))
         my_car = my_queue[0]
         assert my_car in my_queue
+
+
+    def test_str_output(self, build_queue):
+        my_queue = build_queue
+        my_queue.add_car(Car(queue_id = my_queue.get_variables()['queue_id']))
+        queue_vars = my_queue.get_variables()
+        assert str(my_queue) == ('Queue {0}:\n\tState: {1}\n' \
+                                '\tMax Depth: {2}\n\tCars: {3}\n'\
+                                '\tNum Cars: {4}'
+                                ).format(queue_vars['queue_id'],
+                                         queue_vars['state'],
+                                         queue_vars['max_queue_depth'],
+                                         queue_vars['cars'],
+                                         len(my_queue))
+
+
+    def test_is_full(self, build_queue):
+        my_queue = build_queue
+        print(my_queue)
+        my_queue.fill()
+        assert my_queue.is_full() == True
+
+
+    def test_notify(self, fill_queue):
+        my_queue = fill_queue
+        my_queue.get_variables()['state'] == 'waiting'
+        assert my_queue.notify(can_move = True) == ('moving', len(my_queue))

@@ -14,6 +14,8 @@ class Queue:
         self.__queue_id = queue_id
         self.__cars = []
         self.__index = 0
+        self.__state = 'waiting'
+        self.__next_queue = self
 
 
     def add_car(self, car:Car):
@@ -24,12 +26,6 @@ class Queue:
             # raise error because queue is full
             raise QueueFullError(("Queue '{0}' already full with {1} cars"
                                  ).format(self.__queue_id, len(self.__cars)))
-
-
-    def get_variables(self):
-        return {'max_queue_depth': self.__max_queue_depth,
-                'queue_id': self.__queue_id,
-                'cars': self.__cars}
 
 
     def fill(self):
@@ -53,6 +49,23 @@ class Queue:
             return self.__cars.pop(index)
         else:
             return self.__cars.pop()
+
+    def get_variables(self):
+        return {'max_queue_depth': self.__max_queue_depth,
+                'queue_id': self.__queue_id,
+                'cars': self.__cars,
+                'num_cars': len(self),
+                'state': self.__state}
+
+
+    def __str__(self):
+        return ('Queue {0}:\n\tState: {1}\n' \
+                '\tMax Depth: {2}\n\tCars: {3}\n\tNum Cars: {4}'
+                ).format(self.__queue_id,
+                         self.__state,
+                         self.__max_queue_depth,
+                         self.__cars,
+                         str(len(self)))
 
 
     def __len__(self):
@@ -78,3 +91,16 @@ class Queue:
 
     def __contains__(self, item):
         return item in self.__cars
+
+
+    def is_full(self):
+        if len(self) == self.__max_queue_depth:
+            return True
+        else:
+            return False
+
+
+    def notify(self, can_move: bool):
+        if can_move:
+            self.__state = 'moving'
+        return self.__state, len(self)
