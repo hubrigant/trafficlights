@@ -7,3 +7,7 @@ install:
 
 script:
         - pytest
+
+addons:
+        srcclr:
+                debug: true

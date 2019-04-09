@@ -58,6 +58,19 @@ class Queue:
                 'state': self.__state}
 
 
+    def set_value(self, variable: str, value: str, type: str):
+        if type == 'int':
+            my_value = int(value)
+        else:
+            my_value = value
+        if variable == 'queue_id':
+            self.__queue_id = my_valuej
+        if variable == 'max_queue_depth':
+            self.__max_queue_depth = my_value
+        if variable == 'state':
+            self.__state = my_value
+
+
     def __str__(self):
         return ('Queue {0}:\n\tState: {1}\n' \
                 '\tMax Depth: {2}\n\tCars: {3}\n\tNum Cars: {4}'
