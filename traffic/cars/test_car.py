@@ -1,6 +1,6 @@
 import pytest
 from cars.car import Car
-import sys
+
 
 class TestClass(object):
     def test_constructor(self):
@@ -11,7 +11,6 @@ class TestClass(object):
         assert my_car.get_variables()['state'] == 'waiting'
         assert my_car.get_variables()['distance_moved'] == 0
 
-
     def test_private_variables(self):
         my_car = Car(queue_id = 'private test')
         for variable in ['my_car.latency',
@@ -20,7 +19,6 @@ class TestClass(object):
                          'my_car.distance_moved']:
             with pytest.raises(AttributeError):
                 eval(variable)
-
 
     def test_set_value(self):
         my_car = Car(queue_id = 'set_value test')
@@ -47,7 +45,6 @@ class TestClass(object):
         my_car = Car(queue_id = 'str test')
         assert str(my_car) == 'Queue ID: str test; State: waiting, ' \
                               'Latency: 0, Moved: 0, Waiting: 0, Last Moved: 0'
-
 
     def test_notify(self):
         my_car = None
