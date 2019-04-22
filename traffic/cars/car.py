@@ -76,7 +76,7 @@ class Car:
             my_value = int(value)
         else:
             my_value = value
-        if variable == 'queue_id':
+        if variable == 'queue_id': # TODO Since Queues keep track of their Cars, individual Cars don't need to know this
             self.__queue_id = my_value
             return self.__queue_id
         if variable == 'latency':

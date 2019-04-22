@@ -246,6 +246,6 @@ class Queue:
         If the first Car in the Queue reports it has moved 2 spaces (i.e. one car-length), pop() it from the
         Queue.
         """
-        if can_move:
+        if can_move: # Todo Add iteration through cars list to send state updates to each Car
             self.__state = 'moving'
         return self.__state, len(self)
