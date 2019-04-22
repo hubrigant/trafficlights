@@ -1,0 +1,18 @@
+Clean up old files:
+  Description: There are old files/directories left over from previous work that are no longer used.
+  Issue Number: 6
+Fix class name for Queue class:
+  Description: Python has a built-in Queue class. To avoid confusion, the traffic class should be renamed.
+  Issue Number: 5
+Fix name of Queue method for adding Cars:
+  Description: Since the Queue class is an iterable, it should implement method names accordingly. The add_car methods
+               should be combined and renamed to append().
+  Issue Number: 4
+Review intersection model to ensure relevancy:
+  Description: The current Queue class effectively implements a Y-shaped intersection with traffic flowing in a single
+               direction. This does not appear to handle more complicated scenarios, such as turning traffic.
+  Issue Number: 3
+Ensure all modules/classes/methods have docstrings:
+  Description: To ensure compliance with coding standards, implement appropriate, properly-formatted docstrings for
+               every module, class, and method.
+  Issue Number: 2

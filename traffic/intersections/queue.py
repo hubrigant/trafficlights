@@ -47,9 +47,9 @@ class Queue:
     __queue_id : str
         The string identifier of the Queue.
     __cars : array_like
-        The list of Cars currently in the queue
+        The list of Car instances currently in the Queue
     __state : str
-        The current state of the queue, either 'waiting' or 'moving'. Initial state is 'waiting'.
+        The current state of the Queue, either 'waiting' or 'moving'. Initial state is 'waiting'.
     """
 
     def __init__(self, queue_id: str, max_queue_depth: int = 10):
@@ -62,7 +62,7 @@ class Queue:
 
     def add_car(self, car: Car):
         """
-        Add one car to the Queue.
+        Add one Car to the Queue.
 
         Parameters
         ----------
@@ -72,12 +72,12 @@ class Queue:
         Returns
         -------
             int
-                The number of cars in the queue after the add operation.
+                The number of Cars in the Queue after the add operation.
 
         Raises
         ------
             QueueFullError
-                If the queue already has max_queue_length Cars in the car[] list.
+                If the Queue already has max_queue_length Cars in the car[] list.
         """
         if len(self.__cars) < self.__max_queue_depth:
             self.__cars.append(car)
@@ -88,7 +88,7 @@ class Queue:
 
     def fill(self):
         """
-        Completely fill this queue with cars.
+        Completely fill this Queue with Cars.
 
         Returns
         -------
@@ -101,18 +101,18 @@ class Queue:
 
     def add_cars(self, cars:List[Car]):
         """
-        Add one or more cars to this queue.
+        Add one or more Cars to this Queue.
         """
         for i in range(len(cars)):
             self.add_car(cars[i])
         return len(self.__cars)
 
     def empty(self):
-        """Delete all cars in this queue."""
+        """Delete all cars in this Queue."""
         self.__cars = []
 
     def pop(self, index:int = None):
-        """Remove one car from this queue and return that car to caller."""
+        """Remove one car from this Queue and return that car to caller."""
         if index:
             return self.__cars.pop(index)
         else:
@@ -120,7 +120,7 @@ class Queue:
 
     def get_variables(self):
         """
-        Retrieve the list of variables describing this queue.
+        Retrieve the list of variables describing this Queue.
 
         Returns
         -------
