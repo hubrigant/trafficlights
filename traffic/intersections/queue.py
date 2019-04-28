@@ -1,21 +1,25 @@
 """
-A list of Car objects all waiting at one side of an intersection and controlled by one traffic light.
+A list of Car objects all waiting at one side of an intersection and controlled
+by one traffic light.
 
-The queue module defines a set of states and behaviors associated with a traffic queue. A queue represents
-the cars on one street of a traffic light-controlled intersection that are all traveling in the same direction.
+The queue module defines a set of states and behaviors associated with a
+traffic queue. A queue represents the cars on one street of a traffic
+light-controlled intersection that are all traveling in the same direction.
 
 A Queue object is iterable
 
 A queue has several attributes:
-    - The maximum number of cars the queue can hold (__max_queue_depth variable, default 10)
+    - The maximum number of cars the queue can hold (__max_queue_depth variable
+      default 10)
     - The current state (__state variable, either waiting or moving)
     - The string identifier of the queue (__queue_id variable)
     - The list of cars currently in the queue (__cars list)
 
 Notes
 -----
-The Queue class is implemented with encapsulated internal state. The four state attributes (__max_queue_depth,
-__queue_id, __cars, and __state) are private, exposed via the get_variables() and set_value() methods.
+The Queue class is implemented with encapsulated internal state. The four
+state attributes (__max_queue_depth, __queue_id, __cars, and __state) are
+private, exposed via the get_variables() and set_value() methods.
 
 """
 
@@ -24,7 +28,7 @@ from typing import List
 
 
 class QueueFullError(TypeError):
-    def __init__(self, error_text:str):
+    def __init__(self, error_text: str):
         self.__error_text = error_text
 
 
@@ -49,7 +53,8 @@ class Queue:
     __cars : array_like
         The list of Car instances currently in the Queue
     __state : str
-        The current state of the Queue, either 'waiting' or 'moving'. Initial state is 'waiting'.
+        The current state of the Queue, either 'waiting' or 'moving'. Initial
+        state is 'waiting'.
     """
 
     def __init__(self, queue_id: str, max_queue_depth: int = 10):
@@ -77,14 +82,15 @@ class Queue:
         Raises
         ------
             QueueFullError
-                If the Queue already has max_queue_length Cars in the car[] list.
+                If the Queue already has max_queue_length Cars in the car[]
+                list.
         """
         if len(self.__cars) < self.__max_queue_depth:
             self.__cars.append(car)
             return len(self.__cars)
         else:
             raise QueueFullError(("Queue '{0}' already full with {1} cars"
-                                 ).format(self.__queue_id, len(self.__cars)))
+                                  ).format(self.__queue_id, len(self.__cars)))
 
     def fill(self):
         """
@@ -93,13 +99,14 @@ class Queue:
         Returns
         -------
             int
-                The number of Cars in the car[] list once filled. Should equal the max_queue_depth variable.
+                The number of Cars in the car[] list once filled. Should equal
+                the max_queue_depth variable.
         """
         for _ in range(self.__max_queue_depth):
-            self.add_car(Car(queue_id = self.__queue_id))
+            self.add_car(Car(queue_id=self.__queue_id))
         return len(self)
 
-    def add_cars(self, cars:List[Car]):
+    def add_cars(self, cars: List[Car]):
         """
         Add one or more Cars to this Queue.
         """
@@ -111,7 +118,7 @@ class Queue:
         """Delete all cars in this Queue."""
         self.__cars = []
 
-    def pop(self, index:int = None):
+    def pop(self, index: int = None):
         """Remove one car from this Queue and return that car to caller."""
         if index:
             return self.__cars.pop(index)
@@ -141,14 +148,15 @@ class Queue:
 
     def set_value(self, variable: str, value: str, type: str):
         """
-        In order to prevent direct modification of class variables, this method
-        works in conjunction with the get_variable() method to provide
+        In order to prevent direct modification of class variables, this
+        method works in conjunction with the get_variable() method to provide
         method-based access to internal state.
 
         Parameters
         ----------
             variable : string
-                The name of the variable to be set, minus the leading underscores
+                The name of the variable to be set, minus the leading
+                underscores
             value : str
                 The value to be set
             type : str
@@ -172,7 +180,8 @@ class Queue:
         Returns
         -------
             str
-                A formatted, multi-line string with the queue_id, state, cars list, and number of cars.
+                A formatted, multi-line string with the queue_id, state, cars
+                list, and number of cars.
         """
         return ('Queue {0}:\n\tState: {1}\n'
                 '\tMax Depth: {2}\n\tCars: {3}\n\tNum Cars: {4}'
@@ -220,7 +229,8 @@ class Queue:
         return item in self.__cars
 
     def is_full(self):
-        """Return False if this queue does not have max_queue_depth Cars in it, True otherwise."""
+        """Return False if this queue does not have max_queue_depth Cars in it,
+           True otherwise."""
         if len(self) == self.__max_queue_depth:
             return True
         else:
@@ -233,7 +243,8 @@ class Queue:
         Parameters
         ----------
             can_move : bool
-                True if Cars are allowed to move (i.e. their light is green), False otherwise.
+                True if Cars are allowed to move (i.e. their light is green),
+                False otherwise.
 
         Returns
         -------
@@ -242,10 +253,19 @@ class Queue:
 
         Notes
         -----
-        Upon invocation, iterate through all Cars in this Queue, telling them they either can or cannot move.
-        If the first Car in the Queue reports it has moved 2 spaces (i.e. one car-length), pop() it from the
-        Queue.
+        Upon invocation, iterate through all Cars in this Queue, telling them
+        they either can or cannot move. If the first Car in the Queue reports
+        it has moved 2 spaces (i.e. one car-length), pop() it from the Queue.
         """
-        if can_move: # Todo Add iteration through cars list to send state updates to each Car
+        if can_move:
             self.__state = 'moving'
+            remove_from_queue = False
+            for car in self.__cars:
+                state, last_dist_moved, dist_moved = car.notify(can_move=True)
+                if (self.__cars.index(car) == 0
+                        and state == 'moving'
+                        and dist_moved == 2):
+                    remove_from_queue = True
+        if remove_from_queue:
+            return self.__state, len(self), self.pop()
         return self.__state, len(self)

@@ -111,4 +111,7 @@ class TestClass(object):
     def test_notify(self, fill_queue):
         my_queue = fill_queue
         my_queue.get_variables()['state'] == 'waiting'
-        assert my_queue.notify(can_move = True) == ('moving', len(my_queue))
+        my_queue_len = len(my_queue)
+        assert my_queue.notify(can_move = True) == ('moving', my_queue_len)
+        assert my_queue.notify(can_move = True) == ('moving', my_queue_len)
+        assert my_queue.notify(can_move = True) == ('moving', my_queue_len - 1)
