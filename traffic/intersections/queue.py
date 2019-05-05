@@ -257,6 +257,8 @@ class Queue:
         they either can or cannot move. If the first Car in the Queue reports
         it has moved 2 spaces (i.e. one car-length), pop() it from the Queue.
         """
+        remove_from_queue = False
+        leaving_car = None
         if can_move:
             self.__state = 'moving'
             remove_from_queue = False
@@ -267,5 +269,8 @@ class Queue:
                         and dist_moved == 2):
                     remove_from_queue = True
         if remove_from_queue:
-            return self.__state, len(self), self.pop()
-        return self.__state, len(self)
+            print("Pre-pop len: {0}".format(len(self)))
+            leaving_car = self.pop()
+            print("Post-pop len: {0}".format(len(self)))
+            return self.__state, len(self), leaving_car
+        return self.__state, len(self), leaving_car

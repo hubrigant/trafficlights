@@ -14,8 +14,7 @@ def build_queue():
 
 
 @pytest.fixture
-def fill_queue():
-    my_queue = Queue(queue_id = 'fixture full queue', max_queue_depth = 10)
-    for _ in range(my_queue.get_variables()['max_queue_depth']):
-        my_queue.add_car(Car(queue_id = my_queue.get_variables()['queue_id']))
+def full_queue():
+    my_queue = Queue(queue_id='fixture full queue', max_queue_depth=10)
+    my_queue.fill()
     return my_queue

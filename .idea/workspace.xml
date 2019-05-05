@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b84c01f9-1092-40c8-ba0a-5d35561e9ada" name="Default Changelist" comment="Adding docstrings to Car module/class and cleaning up some PEP8-related elements.">
+      <change beforePath="$PROJECT_DIR$/traffic/cars/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/traffic/cars/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/traffic/intersections/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/traffic/intersections/conftest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/traffic/intersections/queue.py" beforeDir="false" afterPath="$PROJECT_DIR$/traffic/intersections/queue.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/traffic/intersections/test_queue.py" beforeDir="false" afterPath="$PROJECT_DIR$/traffic/intersections/test_queue.py" afterDir="false" />
     </list>
@@ -16,8 +18,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/traffic/intersections/test_queue.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="108" selection-start-line="108" selection-end-line="108" />
+            <state relative-caret-position="420">
+              <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/traffic/intersections/conftest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -63,6 +77,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>=</find>
+      <find>¥</find>
+      <find>fill</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -76,6 +92,8 @@
         <option value="$PROJECT_DIR$/traffic/TODO" />
         <option value="$PROJECT_DIR$/traffic/cars/car.py" />
         <option value="$PROJECT_DIR$/traffic/intersections/queue.py" />
+        <option value="$PROJECT_DIR$/traffic/intersections/conftest.py" />
+        <option value="$PROJECT_DIR$/traffic/cars/conftest.py" />
         <option value="$PROJECT_DIR$/traffic/intersections/test_queue.py" />
       </list>
     </option>
@@ -252,16 +270,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/traffic/cars/conftest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/traffic/cars/car.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-459">
@@ -279,10 +287,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/traffic/intersections/conftest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/traffic/cars/conftest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/traffic/intersections/test_queue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="108" selection-start-line="108" selection-end-line="108" />
+        <state relative-caret-position="420">
+          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
