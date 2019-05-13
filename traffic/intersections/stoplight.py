@@ -38,29 +38,41 @@ class Stoplight:
         The list of input queues (required).
     out_queues : array_like
         The list of output queues (required).
+    duration : int
+        The amount of time an input queue is allowed to flow its Cars (required).
 
     Attributes
     ----------
-    __max_queue_depth : int
-        The maximum number of Cars the Queue can hold (default 10).
-    __queue_id : str
-        The string identifier of the Queue.
-    __cars : array_like
-        The list of Car instances currently in the Queue
-    __state : str
-        The current state of the Queue, either 'waiting' or 'moving'. Initial
-        state is 'waiting'.
+    __in_queues : array_like
+        The list of input queues
+    __out_queues : array_like
+        The list of output queues
+    __duration : int
+        The amount of time a given input queue is allowed to flow its Cars.
+
+    Notes
+    -----
+    A Stoplight object is the mediating layer that controls the flow of Cars from
+    one or more input Queues (a.k.a. street lanes) and one or more output Queues.
+    It can be thought of as a model of a real-world stoplight, or in the case of
+    a one input, one output object, a gate.
+
+    The Stoplight object has a duration value that determines how many cycles a
+    given Queue is allowed to flow Cars.
     """
 
-    def __init__(self, in_queues: List, out_queues: List):
-        print("init> Before assigns")
+    def __init__(self, in_queues: List, out_queues: List, duration: int):
         self.__in_queues = []
         self.__out_queues = []
         self.__in_queues = in_queues
         self.__out_queues = out_queues
+        self.__duration = duration
 
     def num_inputs(self):
         return len(self.__in_queues)
 
     def num_outputs(self):
         return len(self.__out_queues)
+
+    def duration(self):
+        return self.__duration
