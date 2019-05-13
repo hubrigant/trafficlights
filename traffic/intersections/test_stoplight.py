@@ -14,5 +14,4 @@ class TestClass(object):
         my_two_queue_light = Stoplight(in_queues=[Queue(queue_id='in_queue')],
                                        out_queues=[Queue(queue_id='out_queue')])
         assert my_two_queue_light.num_inputs() == 1
-        # my_queue = Queue(queue_id="test1", max_queue_depth=10)
-        # assert my_queue.get_variables()['queue_id'] == "test1"
+        assert my_two_queue_light.num_outputs() == 1
