@@ -32,6 +32,10 @@ class QueueFullError(TypeError):
         self.__error_text = error_text
 
 
+class QueueEmptyError(TypeError):
+    def __init__(self, error_text: str):
+        self.__error_text = error_text
+
 class Queue:
     """
     Define a queue of Cars.
@@ -259,6 +263,8 @@ class Queue:
         """
         remove_from_queue = False
         leaving_car = None
+        if can_move and len(self) == 0:
+            raise QueueFullError("Queue is empty, no Cars to move.")
         if can_move:
             self.__state = 'moving'
             remove_from_queue = False

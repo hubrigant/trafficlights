@@ -5,9 +5,17 @@ from intersections.queue import Queue, QueueFullError
 
 
 class TestClass(object):
-    def test_constructor(self):
+    def test_exceptions(self):
         with pytest.raises(TypeError):
             my_queue = Queue()
+        with pytest.raises(QueueFullError):
+            my_queue = Queue(queue_id="error_queue", max_queue_depth=1)
+            my_queue.fill()
+            while my_queue.notify(can_move=True)[2] is None:
+                pass
+            my_queue.notify(can_move=True)
+
+    def test_constructor(self):
         my_queue = Queue(queue_id="test1", max_queue_depth=10)
         assert my_queue.get_variables()['queue_id'] == "test1"
 
