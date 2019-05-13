@@ -34,10 +34,10 @@ class Stoplight:
 
     Parameters
     ----------
-    queue_id : str
-        The identifier name of the queue (required).
-    max_queue_depth : int
-        The maximum number of Cars in the queue (default 10).
+    in_queues : array_like
+        The list of input queues (required).
+    out_queues : array_like
+        The list of output queues (required).
 
     Attributes
     ----------
@@ -52,10 +52,19 @@ class Stoplight:
         state is 'waiting'.
     """
 
-    def __init__(self, in_queues: List=None):
-        __in_queues = in_queues
-        # __out_queue = out_queue
-        pass
+    def __init__(self, in_queues: List, out_queues: List):
+        print("init> Before assigns")
+        self.__in_queues = []
+        self.__out_queues = []
+        print("init> initialization, __in_queues is a {0}; __out_queues is a {1}".format(len(self.__in_queues),
+                                                                                         len(self.__out_queues)
+                                                                                         ))
+        self.__in_queues = in_queues
+        self.__out_queues = out_queues
+        print("init> assignment, __in_queues is a {0}; __out_queues is a {1}".format(len(self.__in_queues),
+                                                                                     len(self.__out_queues)
+                                                                                     ))
 
     def num_inputs(self):
+        print("num_inputs> Len of __in_queues is {0}".format(len(self.__in_queues)))
         return len(self.__in_queues)
