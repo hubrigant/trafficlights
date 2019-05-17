@@ -254,6 +254,11 @@ class Queue:
         -------
             str
                 The current value of __state.
+            int
+                The number of Cars currently in the Queue.
+            Car
+                If the first Car in the Queue, pop() that Car from the Queue and return it.
+                Otherwise, return None
 
         Notes
         -----
