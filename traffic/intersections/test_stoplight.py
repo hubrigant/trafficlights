@@ -23,3 +23,9 @@ class TestClass(object):
         assert my_two_queue_light.num_inputs() == 1
         assert my_two_queue_light.num_outputs() == 1
         assert my_two_queue_light.duration() == 15
+
+    def test_moving_cars(self, two_queue_intersection):
+        my_two_queue_light = two_queue_intersection
+        my_two_queue_light.set_value(variable="state",
+                                     value="moving",
+                                     type="str")
