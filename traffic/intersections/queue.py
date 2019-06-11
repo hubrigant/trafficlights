@@ -23,7 +23,7 @@ private, exposed via the get_variables() and set_value() methods.
 
 """
 
-from cars.car import Car
+from traffic.cars.car import Car
 from typing import List
 
 
@@ -35,6 +35,7 @@ class QueueFullError(TypeError):
 class QueueEmptyError(TypeError):
     def __init__(self, error_text: str):
         self.__error_text = error_text
+
 
 class Queue:
     """
@@ -257,8 +258,8 @@ class Queue:
             int
                 The number of Cars currently in the Queue.
             Car
-                If the first Car in the Queue, pop() that Car from the Queue and return it.
-                Otherwise, return None
+                If the first Car in the Queue, pop() that Car from the Queue
+                and return it.  Otherwise, return None
 
         Notes
         -----
