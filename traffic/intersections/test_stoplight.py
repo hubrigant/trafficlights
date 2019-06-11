@@ -9,23 +9,17 @@ class TestClass(object):
     def test_constructor(self):
         with pytest.raises(TypeError):
             my_stoplight = Stoplight()
-        # in_queue = Queue(queue_id='in_queue')
-        # out_queue = Queue(queue_id='out_queue')
         my_two_queue_light = Stoplight(in_queues=[Queue(queue_id='in_queue')],
-                                       out_queues=[Queue(queue_id='out_queue')],
+                                       out_queues=[Queue(
+                                           queue_id='out_queue')],
                                        duration=15)
         assert my_two_queue_light is not None
 
     def test_query_methods(self):
         my_two_queue_light = Stoplight(in_queues=[Queue(queue_id='in_queue')],
-                                       out_queues=[Queue(queue_id='out_queue')],
+                                       out_queues=[Queue(
+                                          queue_id='out_queue')],
                                        duration=15)
         assert my_two_queue_light.num_inputs() == 1
         assert my_two_queue_light.num_outputs() == 1
         assert my_two_queue_light.duration() == 15
-
-    def test_moving_cars(self, two_queue_intersection):
-        my_two_queue_light = two_queue_intersection
-        my_two_queue_light.set_value(variable="state",
-                                     value="moving",
-                                     type="str")
